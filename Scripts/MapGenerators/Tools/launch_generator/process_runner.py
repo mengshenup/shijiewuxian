@@ -88,6 +88,11 @@ def run_generation_attempt(attempt_num, log_file, full_log_file, old_size, old_m
     
     # ExecCmds format - use quotes for the command
     exec_cmd = f'py {SCRIPT_PATH}'
+    
+    # Prepare environment variables
+    import os
+    env = os.environ.copy()
+    
     cmd = [
         ENGINE_PATH,
         PROJECT_PATH,
@@ -96,7 +101,8 @@ def run_generation_attempt(attempt_num, log_file, full_log_file, old_size, old_m
         '-unattended',
         '-nopause',
         '-nosplash',
-        '-DDC-ForceMemoryCache'      # Force memory cache, bypass all disk/Zen cache
+        '-NoCompile'                      # Skip C++ compilation check (Python scripts don't modify C++ source)
+        # Let UE5 auto-launch Zen Server (better performance than file system cache)
     ]
     
     print(f"[{datetime.now().strftime('%H:%M:%S')}] 启动UE5...")
@@ -133,15 +139,16 @@ def run_generation_attempt(attempt_num, log_file, full_log_file, old_size, old_m
     # Run process
     if DEBUG_MODE:
         print(f"[DEBUG] 启动命令: {' '.join(cmd[:3])}")
+        print(f"[DEBUG] 环境变量: UE-ZenHostName={env.get('UE-ZenHostName')}, UE-ZenPort={env.get('UE-ZenPort')}")
     
     # Redirect stdout to devnull to avoid pipe blocking and keep output clean
     # We read from log files instead for monitoring
-    import os
     devnull = open(os.devnull, 'w')
     process = subprocess.Popen(
         cmd,
         stdout=devnull,  # Redirect to null to avoid blocking
         stderr=devnull,  # Redirect to null
+        env=env          # Pass environment variables with IPv4 Zen Server config
     )
     if DEBUG_MODE:
         print(f"[DEBUG] 进程PID: {process.pid}")
