@@ -1,0 +1,10 @@
+# Task: Using -ExecCmds for Python Execution
+
+## 尝试内容
+测试使用 `-ExecCmds="py ..."` 参数来执行Python代码，而不是 `-ExecutePythonScript`。
+
+## 理论
+UE5支持 `-ExecCmds` 参数来执行控制台命令。`py` 是Python控制台命令。
+
+## 测试
+运行 test_exec_cmds.bat 看是否能自动执行Python脚本。

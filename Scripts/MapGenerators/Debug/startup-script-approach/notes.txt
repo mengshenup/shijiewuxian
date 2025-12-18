@@ -1,0 +1,20 @@
+# Task: Using Startup Script for Auto-Execution
+
+## 理论
+UE5的Python插件会自动执行特定位置的 init_unreal.py 文件。
+
+## 可能的位置
+1. 项目根目录的 Content/Python/init_unreal.py
+2. 插件目录中的 init_unreal.py
+
+## 方法
+创建一个 init_unreal.py 文件，在其中自动调用地图生成器。
+
+## 优势
+- 完全自动化
+- 引擎启动时自动执行
+- 不需要命令行参数
+
+## 劣势
+- 每次打开编辑器都会执行
+- 需要放在特定位置

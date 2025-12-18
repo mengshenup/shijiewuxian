@@ -1,0 +1,27 @@
+# Timeout Pause Test
+
+## 目的
+测试在 Shader 编译期间暂停超时检测的功能
+
+## 问题背景
+- UE5 在编译 Shader 时，日志文件可能长时间没有新输出
+- 原来的 10 秒超时会在编译期间触发，导致进程被错误终止
+- 用户要求：保持 10 秒超时，但在编译期间暂停超时检测
+
+## 实现方案
+在 `output_monitor.py` 中添加：
+1. `is_compiling` 标志：检测到 "compiling" + "shader" 关键词时设为 True
+2. `timeout_paused` 标志：编译期间设为 True
+3. `get_silence_duration()` 返回 0 当 `timeout_paused=True`
+4. 检测编译结束：关键词 "compiled", "complete", "finished", "failed", "error", "logpython"
+
+## 测试结果
+✅ 所有测试通过
+- 初始状态正确
+- 普通输出正常计时
+- 检测到编译开始时暂停超时
+- 编译期间保持暂停
+- 编译结束后恢复超时检测
+
+## 文件
+- test_timeout_pause.py: 单元测试脚本

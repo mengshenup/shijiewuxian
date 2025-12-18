@@ -1,0 +1,45 @@
+# Old Launcher - 重构前的版本
+
+## 文件
+- `launch_generator_old.py` - 原始的869行单文件启动器
+
+## 为什么保留
+- 作为参考和备份
+- 如果新版本有问题可以回滚
+- 记录重构历史
+
+## 重构原因
+1. **代码太长**: 869行，难以维护
+2. **功能耦合**: 监控、追踪、日志、分析混在一起
+3. **难以扩展**: 添加新功能需要修改大文件
+
+## 新版本位置
+- 入口: `Scripts/MapGenerators/launch_generator.py`
+- 模块: `Scripts/MapGenerators/Tools/launch_generator/`
+
+## 重构日期
+2025-12-18
+
+## 重构内容
+将869行单文件拆分成10个模块：
+- config.py - 配置管理
+- path_setup.py - 路径设置
+- output_monitor.py - 输出监控
+- summary_generator.py - 摘要生成
+- log_saver.py - 日志保存
+- timeout_monitor.py - 超时监控
+- trace_parser.py - 追踪解析
+- result_analyzer.py - 结果分析
+- process_runner.py - 进程运行
+- main.py - 主入口
+
+## 如何回滚
+如果新版本有问题：
+
+```bash
+# 备份新版本
+Move-Item Scripts\MapGenerators\launch_generator.py Scripts\MapGenerators\launch_generator_new_backup.py
+
+# 恢复旧版本
+Copy-Item Scripts\MapGenerators\Debug\old-launcher\launch_generator_old.py Scripts\MapGenerators\launch_generator.py
+```

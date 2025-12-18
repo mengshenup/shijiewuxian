@@ -1,0 +1,10 @@
+# Task: Using -run=pythonscript Parameter
+
+## 尝试内容
+测试 `-run=pythonscript` 参数，这可能是UE5执行Python脚本的另一种方式。
+
+## 理论
+某些UE版本支持 `-run=pythonscript` 来执行Python脚本。
+
+## 测试
+运行 test_run_python.bat 看是否能工作。

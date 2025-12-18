@@ -1,0 +1,52 @@
+Resource Loading Test Task
+==========================
+
+Problem:
+--------
+The map generation script (generate_cosmos_002_training_world.py) is failing to load assets.
+Map file size remains at 22848 bytes, indicating no new content is being generated.
+The script's place_training_room() method calls load_asset() which returns None.
+
+Constraint:
+-----------
+MUST use the exact asset paths from the original script. Do NOT suggest alternative assets.
+If assets don't exist, it means there's a problem with how we're referencing them.
+
+Test Approach:
+--------------
+Created test_asset_loading.py that:
+1. Uses EXACT same asset paths as generate_cosmos_002_training_world.py
+2. Uses EXACT same loading method: editor_asset_lib.load_asset(path)
+3. Checks if each asset exists using does_asset_exist()
+4. Reports detailed diagnostics for each asset
+5. Identifies WHY load_asset() returns None
+
+Assets Being Tested (from original script):
+--------------------------------------------
+- /Game/LevelPrototyping/Meshes/SM_Cube
+- /Game/LevelPrototyping/Meshes/SM_Plane
+- /Game/LevelPrototyping/Materials/MI_PrototypeGrid_Gray
+- /Game/LevelPrototyping/Materials/MI_PrototypeGrid_Gray_02
+- /Game/LevelPrototyping/Materials/MI_PrototypeGrid_TopDark
+
+How to Run:
+-----------
+1. Double-click test_asset_loading.bat
+2. Wait for UE5 to start and run the test
+3. Check the output for diagnostic information
+
+Possible Causes:
+----------------
+1. Asset paths are incorrect (typo, wrong case, wrong location)
+2. Assets need to be loaded differently in command-line mode
+3. Assets need time to compile/load before being accessible
+4. LevelPrototyping plugin is not enabled or content is not imported
+5. Python API has different behavior in -unattended mode
+
+Expected Outcome:
+-----------------
+The test will tell us:
+- Which assets exist vs don't exist
+- Which assets load successfully vs return None
+- The exact error messages if any exceptions occur
+This will help us fix the asset loading in the main script.

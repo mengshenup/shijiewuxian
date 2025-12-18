@@ -1,0 +1,23 @@
+============================================================
+  压缩摘要日志
+============================================================
+
+[06:21:49]
+  加载×58 | 构建 | 编译×6 | 着色器×12
+[06:21:54]
+  ⚠ 警告×7 | 错误×9 加载×7 | 保存
+  ✗ [2025.12.17-22.21.49:406][  0]LogStreaming: Warning: Failed to read file '../../../Engine/Plugins/Animation/EaseCurveTool/Resources/Common/ButtonHover
+  ✗ [2025.12.17-22.21.49:444][  0]LogStreaming: Warning: Failed to read file '../../../Engine/Content/Slate/Common/ButtonHoverHint.png' error.
+  ✗ [2025.12.17-22.21.49:444][  0]LogStreaming: Warning: Failed to read file '../../../Engine/Content/Slate/./Editor/Slate/Icons/doc_16x.png' error.
+[06:21:59]
+  ⚠ 警告 | 错误×12 加载×3
+  ✗ [2025.12.17-22.21.55:285][  0]LogPython: Error: Traceback (most recent call last):
+  ✗ [2025.12.17-22.21.55:294][  0]LogPython: Error:   File "D:\001xm/shijiewuxian/Scripts/MapGenerators\generate_cosmos_002_training_world.py", line 445, 
+  ✗ [2025.12.17-22.21.55:305][  0]LogPython: Error:   File "D:\001xm/shijiewuxian/Scripts/MapGenerators\generate_cosmos_002_training_world.py", line 42, i
+
+============================================================
+  执行摘要 (压缩)
+============================================================
+执行时间: 45.4秒
+总输出行数: 263
+============================================================

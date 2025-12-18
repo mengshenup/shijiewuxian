@@ -1,0 +1,30 @@
+# Map Verification Tool
+
+## Purpose
+验证 Cosmos_002_Training_World 地图是否正确生成所有组件
+
+## What was attempted
+创建了一个诊断脚本，用于：
+1. 检查地图文件是否存在
+2. 加载地图
+3. 验证所有期望的Actor是否存在
+4. 检查Actor的位置和属性
+5. 特别检查透明隔板的材质
+
+## How to use
+在UE5编辑器的Python控制台中运行：
+```python
+import sys
+sys.path.append('D:/001xm/shijiewuxian/Scripts/MapGenerators/Debug/verify-map')
+import verify_map_structure
+verify_map_structure.verify()
+```
+
+## Expected output
+脚本会列出所有找到的Actor，包括：
+- 8个房间几何体（地板、天花板、4个墙、2个隔板）
+- 1个玩家出生点
+- 5个光源
+
+## Status
+✅ 工具已创建，可用于诊断地图生成问题

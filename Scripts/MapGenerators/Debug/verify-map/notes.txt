@@ -1,0 +1,21 @@
+Task: Verify map structure and actor placement
+
+Purpose:
+- Check what actors were actually created in the map
+- Verify actor positions and properties
+- Debug placement issues
+
+Usage:
+1. Open UE5 Editor
+2. Open the map: Content/Maps/Cosmos_002_Training_World.umap
+3. Open Output Log (Window > Developer Tools > Output Log)
+4. In Output Log, run: py D:/001xm/shijiewuxian/Scripts/MapGenerators/Debug/verify-map/check_actors.py
+
+What to check:
+- Total actor count (should be 14: 8 geometry + 1 player start + 5 lights)
+- Actor names and types
+- Actor positions (especially Floor Z position and PlayerStart location)
+
+Known issues:
+- Player spawning at edge of floor looking into void
+- Suggests floor size or position incorrect

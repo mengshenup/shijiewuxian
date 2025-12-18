@@ -1,0 +1,12 @@
+# Task: Editor-based Python Execution
+
+## 尝试内容
+测试在编辑器中执行Python脚本，因为命令行 `-ExecutePythonScript` 参数不工作。
+
+## 发现
+- 命令行参数 `-ExecutePythonScript` 在UE5.7.0中似乎不起作用
+- 引擎启动但不执行指定的Python脚本
+- 只看到插件的init_unreal.py被执行
+
+## 结论
+需要使用编辑器内的Python控制台来执行脚本。

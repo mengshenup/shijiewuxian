@@ -1,0 +1,24 @@
+============================================================
+  压缩摘要日志
+============================================================
+  完整日志请查看: Debug/logs/full_debug_log.txt
+============================================================
+
+[06:04:33]
+  加载×58 | 构建 | 编译×6 | 着色器×12
+[06:04:38]
+  ⚠ 警告×8 | 错误×9 加载×7 | 保存
+  ✗ [2025.12.17-22.04.33:162][  0]LogStreaming: Warning: Failed to read file '../../../Engine/Content/Slate/Common/ButtonHoverHint.png' error.
+  ✗ [2025.12.17-22.04.33:162][  0]LogStreaming: Warning: Failed to read file '../../../Engine/Content/Slate/./Editor/Slate/Icons/doc_16x.png' error.
+  ✗ [2025.12.17-22.04.33:284][  0]LogStreaming: Warning: Failed to read file '../../../Engine/Plugins/Animation/EaseCurveTool/Resources/Common/ButtonHover
+[06:04:43]
+  ⚠ 错误×2 加载×3
+  ✗ [2025.12.17-22.04.39:862][  1]LogEditCondition: Error: WorldSettings - EditCondition已尝试使用一个无效运算元“WorldPartition”。
+  ✗ [33880:34048:1218/060440.105:ERROR:device_event_log_impl.cc(196)] [06:04:40.077] USB: usb_service_win.cc:105 SetupDiGetDeviceProperty({{A45C254E-DF1C-
+
+============================================================
+  执行摘要 (压缩)
+============================================================
+执行时间: 45.6秒
+总输出行数: 233
+============================================================

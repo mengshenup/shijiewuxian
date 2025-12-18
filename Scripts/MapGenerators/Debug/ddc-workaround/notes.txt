@@ -1,0 +1,71 @@
+任务: DDC配置问题解决方案
+================================================================================
+
+目标: 实现命令行自动执行地图生成脚本
+
+问题: Zen服务器IPv6连接失败
+- Zen服务器已启动 (PID: 42380)
+- IPv4连接成功: http://127.0.0.1:8558
+- 系统没有IPv6，但UE硬编码尝试连接 [::1]:8558
+- 错误: "Unable to connect to Zen at [::1]:8558"
+
+尝试的方案:
+--------------------------------------------------------------------------------
+
+1. 添加 [Zen] 配置到 DefaultEngine.ini
+   方法: HostName=127.0.0.1, Port=8558, PreferIPv4=true
+   结果: 失败 - UE仍然尝试IPv6
+   原因: UE可能在配置加载前就尝试连接Zen
+   文件: Config/DefaultEngine.ini
+
+2. 环境变量强制IPv4
+   方法: 设置 UE-ZenServerURL=http://127.0.0.1:8558
+   结果: 未完成 - 批处理编码问题
+   原因: 批处理文件编码问题
+   文件: test_zen_ipv4.bat
+
+3. -ddc=noshared 参数
+   方法: 绕过共享DDC，只使用本地
+   结果: 失败 - 仍然尝试连接Zen并超时
+   原因: UE默认配置仍然包含Zen节点
+   文件: test_no_zen.bat
+
+4. -DDC-ForceMemoryCache 参数 ✅ 成功
+   方法: 强制使用内存缓存，完全绕过Zen服务器
+   结果: 成功 - 命令行执行正常工作
+   原因: 使用内存缓存避免了所有DDC配置问题
+   文件: test_memory_cache.bat → generate_map.bat (生产版本)
+
+最终解决方案:
+--------------------------------------------------------------------------------
+使用 -DDC-ForceMemoryCache 参数强制内存缓存
+
+命令行:
+"D:\UnrealEngine570\Engine\Binaries\Win64\UnrealEditor-Cmd.exe" ^
+  "D:\001xm\shijiewuxian\shijiewuxian.uproject" ^
+  -ExecutePythonScript="Scripts/MapGenerators/generate_cosmos_002_training_world.py" ^
+  -stdout -unattended -nopause -nosplash ^
+  -DDC-ForceMemoryCache
+
+优点:
+- 完全绕过Zen服务器IPv6问题
+- 不需要修改系统配置
+- 不需要修改引擎配置
+- 命令行完全自动化
+- AI可以直接执行，无需人工干预
+
+缺点:
+- 首次运行需要编译所有纹理和材质（2-5分钟）
+- 不使用磁盘缓存，每次运行都需要重新编译
+- 内存占用较高
+
+生产文件:
+- Scripts/MapGenerators/generate_map.bat - 最终生产版本
+
+测试文件（保留在Debug文件夹）:
+- test_zen_ipv4.bat - IPv4环境变量测试
+- test_no_zen.bat - 禁用共享DDC测试
+- test_memory_cache.bat - 内存缓存测试（成功方案）
+
+状态: ✅ 已解决
+日期: 2025-12-17

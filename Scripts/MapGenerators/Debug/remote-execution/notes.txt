@@ -1,0 +1,40 @@
+任务: 远程执行 - 向运行中的编辑器发送命令
+================================================================================
+
+目标: 通过socket连接向已打开的UE5编辑器发送Python命令
+
+方法: 使用UE5的Remote Execution功能（端口6776）
+
+尝试的方案:
+--------------------------------------------------------------------------------
+
+1. execute_in_running_editor.py
+   方法: 通过socket连接到127.0.0.1:6776发送Python命令
+   结果: 失败 - Connection refused
+   原因: 编辑器的Remote Execution功能默认未启用
+
+2. generate_in_running_editor.bat
+   方法: 检测编辑器进程，然后调用Python脚本发送命令
+   结果: 失败 - 同样的连接问题
+   原因: 需要在编辑器中手动启用Remote Execution
+
+启用Remote Execution的步骤:
+1. Edit → Project Settings
+2. 搜索 "Python"
+3. 勾选 "Enable Remote Execution"
+4. 重启编辑器
+
+结论:
+--------------------------------------------------------------------------------
+技术上可行，但需要额外配置。
+
+对于开发阶段，直接在编辑器Python控制台执行更简单。
+
+不推荐使用此方案，因为:
+- 需要额外配置
+- 增加复杂度
+- 编辑器内执行已经足够简单
+
+文件说明:
+- execute_in_running_editor.py: Socket通信脚本（需要启用Remote Execution）
+- generate_in_running_editor.bat: 检测编辑器并发送命令（需要配置）
